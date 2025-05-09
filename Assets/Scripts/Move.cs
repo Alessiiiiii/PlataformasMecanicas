@@ -49,7 +49,7 @@ public class rigidbody : MonoBehaviour
     {
         Debug.Log("Choque cotra : " + collision.gameObject.name);
 
-        if (collision.gameObject.CompareTag("piso"))
+        if (collision.gameObject.CompareTag("Piso"))
         {
             CanJump = true;
         }
@@ -59,12 +59,12 @@ public class rigidbody : MonoBehaviour
             Debug.Log("Kill Mee");
             SceneManager.LoadScene(0);
         }
-        if (collision.gameObject.CompareTag("Goal"))
+        if (collision.gameObject.CompareTag("Win"))
         {
-            SceneManager.LoadScene("Win");
+            SceneManager.LoadScene("Winner");
         }
 
-        if (collision.gameObject.CompareTag("item"))
+        if (collision.gameObject.CompareTag("Item"))
         {
             Destroy(collision.gameObject);
 
@@ -76,7 +76,7 @@ public class rigidbody : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Trigger Enter:" + other.gameObject.name);
-        if (other.gameObject.CompareTag("item"))
+        if (other.gameObject.CompareTag("Item"))
         {
             Destroy(other.gameObject);
             collectedItems++;
