@@ -8,6 +8,8 @@ TagManager:
   - Piso
   - Enemigo
   - Winner
+  - Win
+  - KillZone
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ public class rigidbody : MonoBehaviour
     public Rigidbody Rigidbody;
     public bool CanJump;
     public int collectedItems;
-
+    public float velocityMagnitude;
     public TMPro.TextMeshProUGUI scoreText;
     public TMPro.TextMeshProUGUI warningText;
 
@@ -35,7 +35,13 @@ public class rigidbody : MonoBehaviour
         Rigidbody.AddForce(inputVector.x * speed, 0f, inputVector.y * speed, ForceMode.Impulse);
 
         velocity = Rigidbody.linearVelocity;
-        
+        velocityMagnitude = velocity.magnitude;
+        if (velocity.magnitude > 0.1f)
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(velocity.x, 0f, velocity.z));
+        }
+
+
 
         if (Input.GetKeyDown(KeyCode.Space) && CanJump)
 
@@ -54,9 +60,9 @@ public class rigidbody : MonoBehaviour
             CanJump = true;
         }
 
-        if (collision.gameObject.CompareTag("KillZone"))
+        if (collision.gameObject.CompareTag("Enemigo"))
         {
-            Debug.Log("Kill Mee");
+            Debug.Log("Enemigo");
             SceneManager.LoadScene(0);
         }
         if (collision.gameObject.CompareTag("Win"))
@@ -82,7 +88,7 @@ public class rigidbody : MonoBehaviour
             collectedItems++;
             scoreText.text = collectedItems.ToString();
         }
-        if (other.gameObject.CompareTag("Win"))
+        if (other.gameObject.CompareTag("KillZone"))
         {
             warningText.enabled = true;
         }
@@ -92,7 +98,7 @@ public class rigidbody : MonoBehaviour
         Debug.Log("Trigger Exit:" + other.gameObject.name);
 
 
-        if (other.gameObject.CompareTag("Win"))
+        if (other.gameObject.CompareTag("KillZone"))
         {
             warningText.enabled = false;
         }
