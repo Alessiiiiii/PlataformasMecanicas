@@ -37,13 +37,7 @@ public class rigidbody : MonoBehaviour
 
         velocity = Rigidbody.linearVelocity;
         velocityMagnitude = velocity.magnitude;
-        if (velocity.magnitude > 0.1f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(velocity.x, 0f, velocity.z));
-            Rigidbody.MoveRotation(targetRotation);
-
-        }
-
+       
 
 
         if (Input.GetKeyDown(KeyCode.Space) && CanJump)
@@ -70,7 +64,7 @@ public class rigidbody : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Win"))
         {
-            SceneManager.LoadScene("Winner");
+            SceneManager.LoadScene(1);
         }
 
         if (collision.gameObject.CompareTag("Item"))
